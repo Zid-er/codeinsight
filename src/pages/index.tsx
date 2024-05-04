@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import Card from "~/components/Card";
+import PreviewCard from "~/components/PreviewCard";
+import { Button } from '~/components/ui/button'
 import { ThemeProvider } from "~/components/theme-provider"
 import { ModeToggle } from "~/components/LightDarkModeToggle";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from "~/components/ui/dropdown-menu";
@@ -35,15 +36,16 @@ export default function Home() {
             enableSystem
             disableTransitionOnChange
           >
-    <div className="flex flex-col py-12 gap-2 md:px-32">
+    <div className="flex flex-col py-12 gap-2 md:px-32 h-screen bg-zinc-950">
       <div className="flex flex-row gap-1 items-center w-full">
-        <button className="px-6 py-2 bg-primary rounded">All*</button>
-        <button className="px-4 py-2 bg-primary rounded flex flex-row gap-4 justify-center items-center">
-          <p className="bg-transparent">Tag</p>
-          <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
-        </button>
+        <Button variant={"outline"}>All*</Button>
         <DropdownMenu>
-          <DropdownMenuTrigger>Tags</DropdownMenuTrigger>
+          <DropdownMenuTrigger>
+            <Button variant={"outline"} className="flex gap-2 px-2">
+              <p>Tags</p>
+              <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
+            </Button>
+          </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>Languages</DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -59,7 +61,7 @@ export default function Home() {
       <div className="flex flex-col gap-2">
         {
           mock_data.map((post:PostT) => {
-            return <Card key={post.id} {...post} />
+            return <PreviewCard key={post.id} {...post} />
           })
         }
       </div>
