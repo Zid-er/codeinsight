@@ -5,7 +5,10 @@ import Image from 'next/image';
 import dbldarrow from '~/assets/dbldarrow.svg'
 import dbluarrow from '~/assets/dbluarrow.svg'
 import { useState } from 'react';
+import { useThemeStore } from '~/stores/general';
 
+// DBDBDB
+// #f7f7f7
 // DBDBDB
 // TODO if there is info after ...
 const Card = ({
@@ -27,11 +30,11 @@ const Card = ({
     }
 
     return (
-        <div className="bg-primary rounded px-8 py-4 flex flex-col gap-4">
-            <div className="flex flex-col gap-2 bg-primary flex-wrap">
-                <p className="text-xs bg-primary text-[#b5b5b5]">u/developer</p>
-                <p className="text-3xl font-semibold bg-primary">{title}</p>
-                <p className="bg-primary text-sm text-[#b5b5b5]">{expanded ? des : des}</p>
+        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4">
+            <div className="flex flex-col gap-2 flex-wrap">
+                <p className="text-xs">u/developer</p>
+                <p className="text-3xl font-semibold">{title}</p>
+                <p className="text-sm">{expanded ? des : des}</p>
             </div>
             <div className="flex flex-row justify-between bg-transparent">
                 {
@@ -44,7 +47,7 @@ const Card = ({
                         <Image src={dbldarrow} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
                     </button>
                 }
-                <p className="border border-[#282828] rounded-lg text-sm text-[#DBDBDB] px-2 py-1 bg-transparent">{tag}</p>
+                <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent`}>{tag}</p>
             </div>
         </div>
     )

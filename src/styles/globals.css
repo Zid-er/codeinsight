@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 
-* {
+/* * {
     color:white;
     background: #111111;
+} */
+
+* {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+
 }
