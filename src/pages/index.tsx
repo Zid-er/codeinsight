@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Card from "~/components/Card";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from "~/components/ui/dropdown-menu";
 import { PostT } from "~/types/PostT";
 import dar from '~/assets/darrow.svg'
 import Image from 'next/image';
@@ -33,6 +34,17 @@ export default function Home() {
           <p className="bg-transparent">Tag</p>
           <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
         </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger>Tags</DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Languages</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Javascript</DropdownMenuItem>
+            <DropdownMenuItem>C++</DropdownMenuItem>
+            <DropdownMenuItem>C#</DropdownMenuItem>
+            <DropdownMenuItem>Golang</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="flex flex-col gap-2">
         {
