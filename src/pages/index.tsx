@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Card from "~/components/Card";
+import { ThemeProvider } from "~/components/theme-provider"
+import { ModeToggle } from "~/components/LightDarkModeToggle";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from "~/components/ui/dropdown-menu";
 import { PostT } from "~/types/PostT";
 import dar from '~/assets/darrow.svg'
@@ -27,6 +29,12 @@ export default function Home() {
     }
   ]
   return (
+    <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
     <div className="flex flex-col py-12 gap-2 md:px-32">
       <div className="flex flex-row gap-1 items-center w-full">
         <button className="px-6 py-2 bg-primary rounded">All*</button>
@@ -45,6 +53,8 @@ export default function Home() {
             <DropdownMenuItem>Golang</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        
+        <ModeToggle />
       </div>
       <div className="flex flex-col gap-2">
         {
@@ -54,5 +64,6 @@ export default function Home() {
         }
       </div>
     </div>
+    </ThemeProvider>
   );
 }
