@@ -40,11 +40,9 @@ export default function Home() {
       <div className="flex flex-row gap-1 items-center w-full">
         <Button variant={"outline"}>All*</Button>
         <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button variant={"outline"} className="flex gap-2 px-2">
+          <DropdownMenuTrigger className="border border-input bg-background hover:bg-accent hover:text-accent-foreground gap-2 px-2 py-2 border-zinc-900 border-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
               <p>Tags</p>
               <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
-            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>Languages</DropdownMenuLabel>
