@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import PreviewCard from "~/components/PreviewCard";
-import { Button } from '~/components/ui/button'
-import { ThemeProvider } from "~/components/theme-provider"
-import { ModeToggle } from "~/components/LightDarkModeToggle";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from "~/components/ui/dropdown-menu";
+import Card from "~/components/Card";
 import { PostT } from "~/types/PostT";
 import dar from '~/assets/darrow.svg'
 import Image from 'next/image';
@@ -30,40 +26,21 @@ export default function Home() {
     }
   ]
   return (
-    <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-    <div className="flex flex-col py-12 gap-2 md:px-32 h-screen">
+    <div className="flex flex-col py-12 gap-2 md:px-32">
       <div className="flex flex-row gap-1 items-center w-full">
-        <Button variant={"outline"}>All*</Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger className="bg-background hover:bg-accent hover:text-accent-foreground gap-2 px-2 py-2 border-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-              <p>Tags</p>
-              <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Languages</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Javascript</DropdownMenuItem>
-            <DropdownMenuItem>C++</DropdownMenuItem>
-            <DropdownMenuItem>C#</DropdownMenuItem>
-            <DropdownMenuItem>Golang</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        
-        <ModeToggle />
+        <button className="px-6 py-2 bg-primary rounded">All*</button>
+        <button className="px-4 py-2 bg-primary rounded flex flex-row gap-4 justify-center items-center">
+          <p className="bg-transparent">Tag</p>
+          <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
+        </button>
       </div>
       <div className="flex flex-col gap-2">
         {
           mock_data.map((post:PostT) => {
-            return <PreviewCard key={post.id} {...post} />
+            return <Card key={post.id} {...post} />
           })
         }
       </div>
     </div>
-    </ThemeProvider>
   );
 }
