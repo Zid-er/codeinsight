@@ -36,7 +36,7 @@ export default function Home() {
             enableSystem
             disableTransitionOnChange
           >
-    <div className="flex flex-col py-12 gap-2 md:px-32 h-screen bg-zinc-950">
+    <div className="flex flex-col py-12 gap-2 md:px-32 h-screen">
       <div className="flex flex-row gap-1 items-center w-full">
         <Button variant={"outline"}>All*</Button>
         <DropdownMenu>

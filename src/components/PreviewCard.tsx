@@ -56,7 +56,7 @@ const PreviewCard = ({
                 </button>
             }
             </div>
-                <p className="border border-[#282828] rounded-lg text-sm text-[#DBDBDB] px-2 py-1 bg-transparent">{tag}</p>
+                <p className="border border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent">{tag}</p>
             </CardFooter>
         </Card>
     )
