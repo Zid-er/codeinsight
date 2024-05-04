@@ -35,7 +35,7 @@ const PreviewCard = ({
     }
 
     return (
-        <Card className='border-2 border-zinc-900'>
+        <Card className='border-2'>
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>u/developer</CardDescription>
