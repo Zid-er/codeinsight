@@ -17,16 +17,17 @@ const Card = ({
     description,
     tag
 }: PostT) => {
-    const keep_des = description
-    const [des, setDes] = useState<string>(description.length > 400 ? description.slice(0, 200) : description)
-    const [expanded, setExpanded] = useState<boolean>(false)
+    const des = description
+    const expanded = false
+    // const [des, setDes] = useState<string>(description.length > 400 ? description.slice(0, 200) : description)
+    // const [expanded, setExpanded] = useState<boolean>(false)
     const expand = () => {
-        setDes(keep_des)
-        setExpanded(true)
+        // setDes(keep_des)
+        // setExpanded(true)
     }
     const dexpand = () => {
-        setDes(keep_des.slice(0, 200))
-        setExpanded(false)
+        // setDes(keep_des.slice(0, 200))
+        // setExpanded(false)
     }
 
     return (
