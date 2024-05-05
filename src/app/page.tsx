@@ -68,21 +68,13 @@ export default function Home() {
             <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
           </button>
 
-          <div id="dropdown" className={`${ dropdown ? '' : 'hidden' } absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313]`}>
-              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#212121] dark:hover:text-white">JavaScript</a>
-                </li>
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#212121] dark:hover:text-white">Python</a>
-                </li>
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#212121] dark:hover:text-white">C++</a>
-                </li>
-                <li>
-                  <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#212121] dark:hover:text-white">C#</a>
-                </li>
-              </ul>
+          <div id="dropdown" className={`${ dropdown ? '' : 'hidden' } w-1/6 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
+            <div className='flex flex-wrap gap-2 p-3 px-1'>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>Javascript</p>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>C++</p>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>C#</p>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>Python</p>
+            </div>
           </div>
         </div>
         <button onClick={darkMode} className="px-4 py-2.5 dark:bg-primary rounded flex flex-row gap-4 justify-center items-center bg-slate-50">
