@@ -14,21 +14,21 @@ export default function Home() {
   const mock_data = [
     {
       id: 1,
-      title: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Uno",
-      description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum.",
-      tag: "javascript"
+      title: "5 common performance footguns in Javascript",
+      description: "From the '==' operator to using Javascript objects when you shouldn't, there are many ways you could be writing JS wrong...",
+      tag: "Javascript"
     },
     {
       id: 2,
-      title: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Dos",
-      description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum.",
-      tag: "c++"
+      title: "What's the deal with Golang HTTP libraries?",
+      description: "Evaluating the pros and cons of different ways to do HTTP networking in Golang and what is each method's best use case.",
+      tag: "Golang"
     },
     {
       id: 3,
-      title: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Tres",
-      description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum. Lorem Ipsum Lorem Ipsum Lorem Ipsum.",
-      tag: "c#"
+      title: "A roadmap to Leetcode enlightenment",
+      description: "Breaking down and explaining tangible steps you can take to getting good at Leetcode",
+      tag: "DSA"
     }
   ]
   const isDark = useThemeStore((state) => state.isDark)
@@ -74,6 +74,9 @@ export default function Home() {
               <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>C++</p>
               <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>C#</p>
               <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>Python</p>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>Go</p>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>Rust</p>
+              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600`}>DSA</p>
             </div>
           </div>
         </div>
