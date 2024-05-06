@@ -59,9 +59,15 @@ export default function Home() {
   const { theme, setTheme } = useTheme()
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
 
+  const tagValues = ["Javascript", "C++", "Go", "Rust", "Python"]
+  const tagOptions = tagValues.map((tagOption) => 
+    <button id={tagOption}  className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>{tagOption}</button>
+  )
+
+  // code to close tagsDropdown on click outside of it
   let dropdownRef = useRef<HTMLDivElement | null>(null)
-
   useEffect(() => {
     let handler = (e: MouseEvent) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target as Node)) {
@@ -92,13 +98,7 @@ export default function Home() {
 
           <div id="dropdown" className={`${ dropdown ? '' : 'hidden' } w-1/6 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
             <div className='flex flex-wrap gap-2 p-3 px-1'>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>Javascript</p>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>C++</p>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>C#</p>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>Python</p>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>Go</p>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>Rust</p>
-              <p className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>DSA</p>
+              {tagOptions}
             </div>
           </div>
         </div>
