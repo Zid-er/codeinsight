@@ -5,9 +5,8 @@ import { type PostT } from '~/types/PostT'
 import Image from 'next/image';
 import dbldarrow from '~/assets/dbldarrow.svg'
 import dbluarrow from '~/assets/dbluarrow.svg'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useThemeStore } from '~/stores/general';
-
 // DBDBDB
 // #f7f7f7
 // DBDBDB
@@ -29,13 +28,23 @@ const Card = ({
         setDes(keep_des.slice(0, 200))
         setExpanded(false)
     }
-
     return (
-        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4">
+        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4 dark:text-[#b5b5b5]">
             <div className="flex flex-col gap-2 flex-wrap">
                 <p className="text-xs">u/developer</p>
-                <p className="text-3xl font-semibold">{title}</p>
-                <p className="text-sm">{expanded ? des : des}</p>
+                <p className="text-3xl font-semibold dark:text-white">{title}</p>
+                <div className="text-sm flex flex-col flex-wrap gap-1" >
+                {
+                expanded ? 
+                    des.split("\n").map((para: string, i: number) => {
+                        return <p key={i}>{para}</p>
+                    })
+                    : 
+                    des.split("\n").map((para: string, i: number) => {
+                        return <p key={i}>{para}</p>
+                    })
+                }
+                </div>
             </div>
             <div className="flex flex-row justify-between bg-transparent">
                 {
