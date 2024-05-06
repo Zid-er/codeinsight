@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client"
 import React from 'next'
@@ -68,8 +69,8 @@ const PostPage = () => {
             <p className="text-xs font-medium">{mockPost.authorName}</p>
           </div>
           <p className="text-3xl font-semibold">{mockPost.title}</p>
-          {descriptionSlices.map(slice => (
-            <p className="text-sm text-neutral-300">{slice}</p>
+          {descriptionSlices.map((slice, i) => (
+            <p className="text-sm text-neutral-300" key={i}>{slice}</p>
           ))}
         </div>
         <div className="flex flex-row justify-end bg-transparent">
