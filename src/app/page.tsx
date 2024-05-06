@@ -5,7 +5,7 @@
 
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import dar from '~/assets/darrow.svg';
 import moon from '~/assets/moon.svg';
 import sun from '~/assets/sun.svg';
@@ -60,9 +60,21 @@ export default function Home() {
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
 
-  const unDrop = () => {
-    setDropdown(false)
-  }
+  let dropdownRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    let handler = (e: MouseEvent) => {
+      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdown(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handler)
+
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+  })
   useEffect(() => {setHasMounted(true)}, []);
   
   // this line is the key to avoid the error.
@@ -72,8 +84,8 @@ export default function Home() {
     <div className="flex flex-col py-12 gap-2 md:px-32">
       <div className="flex flex-row gap-1 items-center w-full">
         <button className="px-6 py-2 dark:bg-primary rounded bg-slate-50 dark:text-white">All*</button>
-        <div>
-          <button onClick={() => setDropdown((old) => !old)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="bg-slate-50 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary dark:text-white" type="button">
+        <div ref={dropdownRef} >
+          <button onClick={() => setDropdown((openState) => !openState)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="bg-slate-50 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary dark:text-white" type="button">
             Tag 
             <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
           </button>
