@@ -14,8 +14,8 @@ const Comment = ({ comment }: CommentProps) => {
                 <p className="text-sm text-neutral-300 max-w-[90%]">{comment.comment}</p>
             </div>
             {comment.replies ? comment.replies.map((comment, index) => (
-                <div className="pl-8 pt-2 border-neutral-400 border-l">
-                    <Comment key={index} comment={comment} />
+                <div className="pl-8 pt-2 border-neutral-400 border-l"  key={index}>
+                    <Comment comment={comment} />
                 </div>
             )) : null}
         </div>
