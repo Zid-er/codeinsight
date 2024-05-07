@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client"
 
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
@@ -11,8 +12,8 @@ import dar from '~/assets/darrow.svg';
 import moon from '~/assets/moon.svg';
 import sun from '~/assets/sun.svg';
 import Card from "~/components/Card";
-import { useThemeStore } from "~/stores/general";
 import { type PostT } from "~/types/PostT";
+import Link from 'next/link';
 
 
 const mock_data = [
@@ -58,12 +59,29 @@ const mock_data = [
   }
 ]
 
+type PostsResponse = {
+  posts: PostT[],
+}
+
+const getPosts = async () => {
+  try {
+    const res = await axios.get<PostsResponse>("/api/post/get", { withCredentials: true })
+    return res.data.posts
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export default function Home() {
   const { resolvedTheme: theme, setTheme } = useTheme()
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
   const tagValues = ["Javascript", "C++", "Go", "Rust", "Python"]
   const [selectedTags, setSelectedTags] = useState<Map<string, boolean>>(new Map<string, boolean>())
+  const { data: posts } = useQuery({
+    queryKey: ["posts"],
+    queryFn: getPosts,
+  })
 
   // for (const tagValue of tagValues) {
   //   selectedTags.set(tagValue, false)
@@ -71,18 +89,7 @@ export default function Home() {
 
   // code to close tagsDropdown on click outside of it
   let dropdownRef = useRef<HTMLDivElement | null>(null)
-  const [mock_data, setMockData] = useState<PostT[]>([])
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const res = await axios.get("/api/post/get", { withCredentials: true })
-        console.log(res)
-        setMockData(res.data.posts)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getPosts()
     setHasMounted(true)
 
     let handler = (e: MouseEvent) => {
@@ -142,13 +149,17 @@ export default function Home() {
           }
         </button>
       </div>
-      <div className="flex flex-col gap-2">
+      {posts && <div className="flex flex-col gap-2">
         {
-          mock_data.map((post: PostT) => {
-            return <Card key={post.id} {...post} />
+          posts.map((post) => {
+            return (
+              <Link href={`/posts/${post.id}`}>
+                <Card key={post.id} {...post} />
+              </Link>
+            )
           })
         }
-      </div>
+      </div>}
     </div>
   );
 }
