@@ -20,3 +20,4 @@
 [] START DATABASE?
 [] Input sanitizing 
 [] /> >Data< kind drill for btn
+[] show feedback

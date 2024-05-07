@@ -9,7 +9,7 @@ type CommentProps = {
 const Comment = ({ comment }: CommentProps) => {
     return (
         <div>
-            <p className="text-sm pb-1.5 font-medium">{comment.authorName}</p>
+            <p className="text-sm pb-1.5 font-medium dark:text-neutral-400">{comment.authorName}</p>
             <div className="flex align-center px-4 py-4 border min-h-16 border-slate-200 dark:bg-primary dark:border-none rounded-lg">
                 <p className="text-sm text-neutral-300 max-w-[90%]">{comment.comment}</p>
             </div>

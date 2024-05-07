@@ -82,7 +82,7 @@ const PostPage = () => {
         <div className="flex flex-col gap-2 flex-wrap">
           <div className="flex flex-row gap-2 items-center">
             <Image className="rounded-full" src={user} alt="user" width={32} height={32} />
-            <p className="text-xs font-medium dark:text-neutral-200">{mockPost.authorName}</p>
+            <p className="text-xs font-medium dark:text-neutral-200 text-white">{mockPost.authorName}</p>
           </div>
           <p className="text-3xl font-semibold dark:text-white">{post.title}</p>
           <p className="text-sm text-neutral-300">{post.description}</p>

@@ -4,6 +4,11 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { env } from "~/env";
 import { cookies } from "next/headers";
+import * as jose from "jose";
+
+const jwtConfig = {
+    secret: new TextEncoder().encode(env.SECRET),
+}
 
 export async function POST(req: Request) {
     try {
@@ -20,12 +25,23 @@ export async function POST(req: Request) {
                 // return NextResponse.json({ message: "Login success!", token: "123" }, { status: 404 });
             });
             console.log("USER: ", res)
-            const token = jwt.sign({
-                username: res.username,
-                userId: res.id
-            }, env.SECRET, { expiresIn: '1h' });
-            cookies().set("token", token);
-            return NextResponse.json({ message: "Found user!", token: token }, { status: 200 });
+            try {
+                const alg = 'HS256'
+                const token = await new jose.SignJWT({ 
+                    username: res.username,
+                    userId: res.id
+                 })
+                .setProtectedHeader({ alg })    
+                .setIssuedAt()
+                .setExpirationTime('24h')
+                .sign(jwtConfig.secret)
+                console.log("TOKEN IS: ", token)
+                cookies().set("token", token);
+                return NextResponse.json({ message: "Found user!", token: token }, { status: 200 });
+
+            } catch (err) {
+                return NextResponse.json({ message: "Err When Signing JWT!" }, { status: 404 });
+            }
         } else {
             return NextResponse.json({ message: "User not found!" }, { status: 404 });
         }
@@ -35,3 +51,10 @@ export async function POST(req: Request) {
         throw new Error("Err In LOGIN!")
     }
 }
+
+
+
+// const token = jwt.sign({
+//     username: res.username,
+//     userId: res.id
+// }, env.SECRET, { expiresIn: '1m' });

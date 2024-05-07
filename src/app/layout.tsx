@@ -37,7 +37,6 @@ export default function RootLayout({
     } else {
       setTheme("light")
     }
-    console.log(iisDark)
     setMounted(true)
   }, [])
   return (

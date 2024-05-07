@@ -1,6 +1,7 @@
 "use client"
 
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "~/ui/Button";
@@ -39,6 +40,7 @@ const Login = () => {
                     <input value={password} onChange={(e) => setPassword(e.target.value)}  className="border border-[#858585] outline-none px-2 py-2 rounded dark:border-[#2d2d2d] bg-transparent" type="password" />
                 </div>
                 <Button>Save</Button>
+                <Link href="/signup" className="text-xs text-blue-500">Signup</Link>
             </div>
         </form>
     );
