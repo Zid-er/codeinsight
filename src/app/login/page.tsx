@@ -27,7 +27,7 @@ const Login = () => {
         }
     }
     return (
-        <form className="flex flex-col justify-center items-center translate-y-[30%] dark:text-[#ffffff]" onSubmit={handleSubmit}>
+        <form className="flex flex-col justify-center items-center translate-y-[50%] dark:text-[#ffffff]" onSubmit={handleSubmit}>
             <div className="dark:bg-primary bg-slate-50 p-12 rounded min-w-[30%] gap-4 flex flex-col">
                 <p className="text-xl font-medium pb-4">Login</p>
                 <div className="flex flex-col">

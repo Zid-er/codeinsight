@@ -8,6 +8,7 @@ import { useThemeStore } from "~/stores/general";
 import "~/styles/globals.css";
 import { ThemeProvider, useTheme } from 'next-themes'
 import Navbar from "~/components/Navbar";
+import { usePathname } from 'next/navigation'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export default function RootLayout({
   }) {
     const [mounted, setMounted] = useState<boolean>(false)
     const { setTheme } = useTheme()
-  
+    const pathname = usePathname()
     useEffect(() => {
       const iisDark = localStorage.getItem("darkMode")
       if (iisDark === null) {
@@ -37,6 +38,17 @@ export default function RootLayout({
       console.log(iisDark)
       setMounted(true)
     }, [])
+    if (pathname.includes("login") || pathname.includes("signin")) {
+      return (
+        <html lang="en" className={`font-sans ${inter.variable} dark:bg-[#111111] dark:text-white text-black h-screen`} suppressHydrationWarning={true}>
+          <body>
+            <ThemeProvider attribute="class">
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      )
+    }
     return (
       <html lang="en" className={`font-sans ${inter.variable} dark:bg-[#111111] dark:text-white text-black h-screen`} suppressHydrationWarning={true}>
         <body>
