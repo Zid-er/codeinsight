@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useThemeStore } from "~/stores/general";
 import "~/styles/globals.css";
 import { ThemeProvider, useTheme } from 'next-themes'
+import Navbar from "~/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
       <html lang="en" className={`font-sans ${inter.variable} dark:bg-[#111111] dark:text-white text-black h-screen`} suppressHydrationWarning={true}>
         <body>
           <ThemeProvider attribute="class">
+            <Navbar />
             {children}
           </ThemeProvider>
         </body>

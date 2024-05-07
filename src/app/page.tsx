@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client"
 
+import axios from 'axios';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -13,58 +14,70 @@ import Card from "~/components/Card";
 import { useThemeStore } from "~/stores/general";
 import { type PostT } from "~/types/PostT";
 
+
+const mock_data = [
+  {
+    id: 1,
+    title: "In 10 Days!",
+    description: "Created in 10 Days: Brendan Eich created JavaScript in just 10 days in May 1995 while working at Netscape Communications Corporation. It was originally named Mocha, then changed to LiveScript before finally settling on JavaScript.",
+    tag: "JS"
+  },
+  {
+    id: 2,
+    title: "Difference between Interface & Type in TypeScript",
+    description: `
+    - Types in TypeScript allow you to create an alias for a specific data type, combination of data types, or a complex structure.
+    - They can be used to define custom types such as primitive types, union types, tuple types, and more.
+    - Types are flexible and can represent a wide range of values, including primitive types, objects, functions, and more.
+    - Interfaces in TypeScript are used to define the structure of an object. They describe the properties and methods that an object must have.
+    - Interfaces can be implemented by classes, ensuring that the class implements all properties and methods defined in the interface.
+    - Interfaces are open-ended, meaning you can extend them later to add additional properties or methods.`,
+    tag: "JS"
+  },
+  {
+    id: 3,
+    title: "CONST VS LET VS VAR",
+    description: `
+    - var:
+    - - Function-scoped.
+    - - Hoisted to the top of its function or global scope.
+    - - Allows redeclaration and reassignment.
+    - - Can be accessed before declaration (with undefined value).
+    - let:
+    - - Block-scoped.
+    - - Not hoisted to the top of the block.
+    - - Allows reassignment but not redeclaration within the same block scope.
+    - - Cannot be accessed before declaration.
+    - const:
+    - - Block-scoped.
+    - - Not hoisted to the top of the block.
+    - - Requires initialization during declaration.
+    - - Prevents reassignment and redeclaration within the same block scope.
+    - - Provides immutability for assigned values (not for objects, arrays, etc.).`,
+    tag: "JS"
+  }
+]
+
 export default function Home() {
-  const mock_data = [
-    {
-      id: 1,
-      title: "In 10 Days!",
-      description: "Created in 10 Days: Brendan Eich created JavaScript in just 10 days in May 1995 while working at Netscape Communications Corporation. It was originally named Mocha, then changed to LiveScript before finally settling on JavaScript.",
-      tag: "JS"
-    },
-    {
-      id: 2,
-      title: "Difference between Interface & Type in TypeScript",
-      description: `
-      - Types in TypeScript allow you to create an alias for a specific data type, combination of data types, or a complex structure.
-      - They can be used to define custom types such as primitive types, union types, tuple types, and more.
-      - Types are flexible and can represent a wide range of values, including primitive types, objects, functions, and more.
-      - Interfaces in TypeScript are used to define the structure of an object. They describe the properties and methods that an object must have.
-      - Interfaces can be implemented by classes, ensuring that the class implements all properties and methods defined in the interface.
-      - Interfaces are open-ended, meaning you can extend them later to add additional properties or methods.`,
-      tag: "JS"
-    },
-    {
-      id: 3,
-      title: "CONST VS LET VS VAR",
-      description: `
-      - var:
-      - - Function-scoped.
-      - - Hoisted to the top of its function or global scope.
-      - - Allows redeclaration and reassignment.
-      - - Can be accessed before declaration (with undefined value).
-      - let:
-      - - Block-scoped.
-      - - Not hoisted to the top of the block.
-      - - Allows reassignment but not redeclaration within the same block scope.
-      - - Cannot be accessed before declaration.
-      - const:
-      - - Block-scoped.
-      - - Not hoisted to the top of the block.
-      - - Requires initialization during declaration.
-      - - Prevents reassignment and redeclaration within the same block scope.
-      - - Provides immutability for assigned values (not for objects, arrays, etc.).`,
-      tag: "JS"
-    }
-  ]
   const { theme, setTheme } = useTheme()
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
 
-  const unDrop = () => {
-    setDropdown(false)
-  }
-  useEffect(() => {setHasMounted(true)}, []);
-  
+  const [mock_data, setMockData] = useState<PostT[]>([])
+  useEffect(() => {
+    const getPosts = async () => {
+        try {
+            const res = await axios.get("/api/post/get", { withCredentials: true })
+            console.log(res)
+            setMockData(res.data.posts)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    getPosts()
+    setHasMounted(true)
+  }, [])
+
   // this line is the key to avoid the error.
   if (!hasMounted) return null;
 

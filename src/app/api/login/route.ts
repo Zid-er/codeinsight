@@ -21,10 +21,8 @@ export async function POST(req: Request) {
             });
             console.log("USER: ", res)
             const token = jwt.sign({
-                data: {
-                    username: res.username,
-                    userId: res.id
-                }
+                username: res.username,
+                userId: res.id
             }, env.SECRET, { expiresIn: '1h' });
             cookies().set("token", token);
             return NextResponse.json({ message: "Found user!", token: token }, { status: 200 });
