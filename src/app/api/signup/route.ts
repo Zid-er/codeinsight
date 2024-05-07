@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ message: "Created user!" }, { status: 200 });
 
     } catch (err) {
-        console.log("[ERR IN SIGN IN] : ", err)
-        throw new Error("Err In SIGN IN!")
+        console.log("[ERR IN SIGN UP] : ", err)
+        throw new Error("Err In SIGN UP!")
     }
 }

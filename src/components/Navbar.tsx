@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import logo from "~/assets/logo2.svg";
 import { Button } from "~/ui/Button";
-   
 
 const Navbar = () => {
     const [user, setUser] = useState<boolean | { id: string, username: string, iat: number, exp: number }>(false)
@@ -29,8 +28,10 @@ const Navbar = () => {
                     <p className="font-bold text-xs dark:text-[#b3b3b3]">CodeInsight</p>
                 </Link>
                 <div className="flex flex-row gap-4 items-center justify-center">
-                    <a href="/login">Login</a>
-                    <Button goto="/signin">Sign Up</Button>
+                    <Link href="/login">Login</Link>
+                    <Link href="/signup">
+                        <Button>Sign Up</Button>
+                    </Link>
                 </div>
             </div>
         );
@@ -45,7 +46,7 @@ const Navbar = () => {
         </div>
     );
 }
- 
+
 export default Navbar;
 
 
