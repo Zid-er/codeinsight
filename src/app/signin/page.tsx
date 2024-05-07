@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "~/ui/Button";
 
-const Login = () => {
+const Signin = () => {
     const [password, setPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [username, setUsername] = useState<string>("")
@@ -45,4 +45,4 @@ const Login = () => {
     );
 }
  
-export default Login;
+export default Signin;
