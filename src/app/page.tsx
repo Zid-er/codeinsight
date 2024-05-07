@@ -69,8 +69,10 @@ export default function Home() {
   //   selectedTags.set(tagValue, false)
   // }
 
+  // code to close tagsDropdown on click outside of it
+  let dropdownRef = useRef<HTMLDivElement | null>(null)
   const [mock_data, setMockData] = useState<PostT[]>([])
-<!--   useEffect(() => {
+  useEffect(() => {
     const getPosts = async () => {
         try {
             const res = await axios.get("/api/post/get", { withCredentials: true })
@@ -82,7 +84,19 @@ export default function Home() {
     }
     getPosts()
     setHasMounted(true)
-  }, []) -->
+    
+    let handler = (e: MouseEvent) => {
+      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdown(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handler)
+
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }}, [])
+    
   function handleTagSelection(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     // @ts-ignore
     const tagToAdd: string = e.target.id
@@ -98,21 +112,6 @@ export default function Home() {
     className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 hover:opacity-50 bg-transparent hover:border-lime-600 dark:text-white ` + (selectedTags.get(tagOption) ? "bg-lime-400 dark:text-black" : "")}>{tagOption}</button>
   )
 
-  // code to close tagsDropdown on click outside of it
-  let dropdownRef = useRef<HTMLDivElement | null>(null)
-  useEffect(() => {
-    let handler = (e: MouseEvent) => {
-      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdown(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handler)
-
-    return () => {
-      document.removeEventListener("mousedown", handler)
-    }
-  })
   // this line is the key to avoid the error.
   if (!hasMounted) return null;
 
