@@ -8,11 +8,15 @@ import "~/styles/globals.css";
 import { ThemeProvider, useTheme } from 'next-themes'
 import Navbar from "~/components/Navbar";
 import { usePathname } from 'next/navigation'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
+
+const queryClient = new QueryClient()
 
 
 export default function RootLayout({
@@ -39,9 +43,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`font-sans ${inter.variable} dark:bg-[#111111] dark:text-white text-black h-screen`} suppressHydrationWarning={true}>
       <body>
-        <ThemeProvider attribute="class">
-          {children}
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider attribute="class">
+            {children}
+          </ThemeProvider>
+        </QueryClientProvider>
       </body>
     </html>
   )
