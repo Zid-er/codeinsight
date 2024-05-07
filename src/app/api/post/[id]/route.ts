@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 		return NextResponse.json({ ...post }, { status: 200 });
 
 	} catch (err) {
-		console.log("[ERR IN GET POSTS] : ", err)
-		throw new Error("Err In GET POSTS!")
+		console.log("[ERR IN GET POSTS [id]] : ", err)
+		throw new Error("Err In GET POSTS [id]!")
 	}
 }

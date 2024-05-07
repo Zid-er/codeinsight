@@ -9,13 +9,18 @@ const Navbar = () => {
     const [user, setUser] = useState<boolean | { id: string, username: string, iat: number, exp: number }>(false)
     useEffect(() => {
         const ca = async () => {
-            const auth = await axios.get("/api/isauth", { withCredentials: true })
-            console.log(auth)
-            if (auth && auth.data) {
-                const authy = auth.data.isauth
-                if (authy) {
-                    setUser(auth.data.user)
+            try {
+                const auth = await axios.get("/api/isauth", { withCredentials: true })
+                console.log("[authed navbar]")
+                if (auth && auth.data) {
+                    const authy = auth.data.isauth
+                    if (authy) {
+                        setUser(auth.data.user)
+                    }
                 }
+                
+            } catch(err) {
+                console.log("[unauth navbar]")
             }
         }
         ca()

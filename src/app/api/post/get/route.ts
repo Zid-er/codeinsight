@@ -8,7 +8,7 @@ export async function GET(req: Request) {
         return NextResponse.json({ message: "Got posts", posts: posts }, { status: 200 });
 
     } catch (err) {
-        console.log("[ERR IN GET POSTS] : ", err)
-        throw new Error("Err In GET POSTS!")
+        console.log("[ERR IN GET POSTS] [posts many] : ", err)
+        throw new Error("Err In GET POSTS [posts many]!")
     }
 }

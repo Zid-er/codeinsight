@@ -83,9 +83,6 @@ export default function Home() {
     queryFn: getPosts,
   })
 
-  // for (const tagValue of tagValues) {
-  //   selectedTags.set(tagValue, false)
-  // }
 
   // code to close tagsDropdown on click outside of it
   let dropdownRef = useRef<HTMLDivElement | null>(null)
@@ -130,7 +127,7 @@ export default function Home() {
         <div ref={dropdownRef} >
           <button onClick={() => setDropdown((openState) => !openState)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="bg-slate-50 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary dark:text-white" type="button">
             Tag
-            <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
+            <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent w-auto h-auto" />
           </button>
 
           <div id="dropdown" className={`${dropdown ? '' : 'hidden'} w-1/5 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
@@ -151,9 +148,9 @@ export default function Home() {
       </div>
       {posts && <div className="flex flex-col gap-2">
         {
-          posts.map((post) => {
+          posts.map((post, i) => {
             return (
-              <Link href={`/posts/${post.id}`}>
+              <Link href={`/posts/${post.id}`} key={i}>
                 <Card key={post.id} {...post} />
               </Link>
             )
