@@ -60,6 +60,7 @@ const mock_data = [
 
 export default function Home() {
   const { theme, setTheme } = useTheme()
+  const { resolvedTheme: theme, setTheme } = useTheme()
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
   const tagValues = ["Javascript", "C++", "Go", "Rust", "Python"]
