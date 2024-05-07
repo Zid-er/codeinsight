@@ -2,7 +2,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import logo from "~/assets/logo.svg";
+import logo from "~/assets/logo2.svg";
 import { Button } from "~/ui/Button";
    
 
