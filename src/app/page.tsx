@@ -59,11 +59,26 @@ export default function Home() {
   const { theme, setTheme } = useTheme()
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-
   const tagValues = ["Javascript", "C++", "Go", "Rust", "Python"]
+  const [selectedTags, setSelectedTags] = useState<Map<string, boolean>>(new Map<string,boolean>())
+  
+  // for (const tagValue of tagValues) {
+  //   selectedTags.set(tagValue, false)
+  // }
+
+  function handleTagSelection(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    // @ts-ignore
+    const tagToAdd: string = e.target.id
+    setSelectedTags((prevSelectedTags) => {
+      const updatedSelectedTags = new Map(prevSelectedTags);
+      updatedSelectedTags.set(tagToAdd, !prevSelectedTags.get(tagToAdd));
+      return updatedSelectedTags;
+    });
+  }
+
   const tagOptions = tagValues.map((tagOption) => 
-    <button id={tagOption}  className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 bg-transparent hover:opacity-50 hover:border-lime-600 dark:text-white`}>{tagOption}</button>
+    <button key={tagOption} id={tagOption} onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleTagSelection(e)} 
+    className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 hover:opacity-50 bg-transparent hover:border-lime-600 dark:text-white ` + (selectedTags.get(tagOption) ? "bg-lime-400 dark:text-black" : "")}>{tagOption}</button>
   )
 
   // code to close tagsDropdown on click outside of it
@@ -96,8 +111,8 @@ export default function Home() {
             <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent" />
           </button>
 
-          <div id="dropdown" className={`${ dropdown ? '' : 'hidden' } w-1/6 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
-            <div className='flex flex-wrap gap-2 p-3 px-1'>
+          <div id="dropdown" className={`${ dropdown ? '' : 'hidden' } w-1/5 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
+            <div className='flex flex-wrap gap-2 p-3 px-1 w-full'>
               {tagOptions}
             </div>
           </div>
