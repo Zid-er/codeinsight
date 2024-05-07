@@ -11,3 +11,23 @@
 
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background: #191919;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #393939;
+    border-radius: 10px;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #242424;
+}
