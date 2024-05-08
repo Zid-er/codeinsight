@@ -21,7 +21,7 @@ const mock_data = [
     id: 1,
     title: "In 10 Days!",
     description: "Created in 10 Days: Brendan Eich created JavaScript in just 10 days in May 1995 while working at Netscape Communications Corporation. It was originally named Mocha, then changed to LiveScript before finally settling on JavaScript.",
-    tag: "Javascript"
+    tag: "JS"
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const mock_data = [
     - Interfaces in TypeScript are used to define the structure of an object. They describe the properties and methods that an object must have.
     - Interfaces can be implemented by classes, ensuring that the class implements all properties and methods defined in the interface.
     - Interfaces are open-ended, meaning you can extend them later to add additional properties or methods.`,
-    tag: "Javascript"
+    tag: "JS"
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ const mock_data = [
     - - Requires initialization during declaration.
     - - Prevents reassignment and redeclaration within the same block scope.
     - - Provides immutability for assigned values (not for objects, arrays, etc.).`,
-    tag: "Javascript"
+    tag: "JS"
   }
 ]
 
