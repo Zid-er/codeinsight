@@ -8,7 +8,6 @@ export async function POST(req: Request) {
         if (!email || !password || !username) return NextResponse.json({ message: "Empty fields!" }, { status: 404 })
         const isEmail = await db.user.findFirst({ where: { email: email } })
         if (isEmail) return NextResponse.json({ message: "Exists!" }, { status: 404 });
-        let done = false
         const saltRounds = 10
         bcrypt.genSalt(saltRounds, function(err, salt) {
             bcrypt.hash(password, salt, async function(err, hash) {
