@@ -12,8 +12,9 @@ import dar from '~/assets/darrow.svg';
 import moon from '~/assets/moon.svg';
 import sun from '~/assets/sun.svg';
 import Card from "~/components/Card";
-import { type PostT } from "~/types/PostT";
+import { type PostType } from "~/types/PostType";
 import Link from 'next/link';
+import { Button } from '~/ui/Button';
 
 
 const mock_data = [
@@ -60,7 +61,7 @@ const mock_data = [
 ]
 
 type PostsResponse = {
-  posts: PostT[],
+  posts: PostType[],
 }
 
 const getPosts = async () => {
@@ -122,29 +123,33 @@ export default function Home() {
 
   return (
     <div className="flex flex-col py-12 gap-2 md:px-32">
-      <div className="flex flex-row gap-1 items-center w-full">
-        <button className="px-6 py-2 dark:bg-primary rounded bg-slate-50 dark:text-white">All*</button>
-        <div ref={dropdownRef} >
-          <button onClick={() => setDropdown((openState) => !openState)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="bg-slate-50 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary dark:text-white" type="button">
-            Tag
-            <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent w-auto h-auto" />
-          </button>
+      <div className="flex flex-row gap-1 items-center w-full justify-between">
+        <div className="flex flex-row items-center">
+          <button className="px-6 py-2 dark:bg-primary rounded bg-slate-50 dark:text-white">All*</button>
+          <div ref={dropdownRef} >
+            <button onClick={() => setDropdown((openState) => !openState)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="bg-slate-50 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-2 dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary dark:text-white" type="button">
+              Tag
+              <Image src={dar} alt="dbl d arrow" width="10" height="10" className="bg-transparent w-auto h-auto" />
+            </button>
 
-          <div id="dropdown" className={`${dropdown ? '' : 'hidden'} w-1/5 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
-            <div className='flex flex-wrap gap-2 p-3 px-1 w-full'>
-              {tagOptions}
+            <div id="dropdown" className={`${dropdown ? '' : 'hidden'} w-1/5 max-w-60 absolute md:left-36 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow px-2 dark:bg-[#131313] mt-3`}>
+              <div className='flex flex-wrap gap-2 p-3 px-1 w-full'>
+                {tagOptions}
+              </div>
             </div>
           </div>
+          <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="px-4 py-2 dark:bg-primary rounded flex flex-row gap-4 justify-center items-center bg-slate-50 dark:text-white">
+            {/* {theme === "dark" ? "light" : "dark"} */}
+            {
+              theme === "dark" ?
+                <Image src={sun} alt="sun" width="20" height="20" className="bg-transparent" />
+                :
+                <Image src={moon} alt="moon" width="20" height="20" className="bg-transparent" />
+            }
+          </button>
         </div>
-        <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="px-4 py-2 dark:bg-primary rounded flex flex-row gap-4 justify-center items-center bg-slate-50 dark:text-white">
-          {/* {theme === "dark" ? "light" : "dark"} */}
-          {
-            theme === "dark" ?
-              <Image src={sun} alt="sun" width="20" height="20" className="bg-transparent" />
-              :
-              <Image src={moon} alt="moon" width="20" height="20" className="bg-transparent" />
-          }
-        </button>
+        <Button goto="/create">Create +</Button>
+
       </div>
       {posts && <div className="flex flex-col gap-2">
         {

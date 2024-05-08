@@ -1,5 +1,5 @@
 export 
-interface PostT {
+interface PostType {
   id: number,
   title: string,
   description: string,

@@ -44,6 +44,7 @@ export default function RootLayout({
       <body>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider attribute="class">
+            <Navbar />
             {children}
           </ThemeProvider>
         </QueryClientProvider>

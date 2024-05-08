@@ -47,7 +47,9 @@ const Navbar = () => {
                 <Image src={logo} alt="logo" className="w-8 h-8" />
                 <p className="font-bold text-xs dark:text-[#b3b3b3]">CodeInsight</p>
             </Link>
-            <Button goto="/create">Create +</Button>
+            <div className="flex flex-row gap-2 justify-center items-center">
+                <a href="/projects">Projects</a>
+            </div>
         </div>
     );
 }

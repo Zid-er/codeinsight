@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 
-type PostType = {
+type PostTypeype = {
   id: number,
   title: string,
   description: string,
@@ -50,7 +50,7 @@ const mockComments: CommentType[] = [
   }
 ]
 
-const mockPost: PostType = {
+const mockPost: PostTypeype = {
   id: 1,
   authorName: "u/postAuthor",
   title: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Uno",
@@ -61,7 +61,7 @@ const mockPost: PostType = {
 
 const getPost = async (postId: string) => {
   try {
-    const res = await axios.get<PostType>(`/api/post/${postId}`, { withCredentials: true })
+    const res = await axios.get<PostTypeype>(`/api/post/${postId}`, { withCredentials: true })
     return res.data
   } catch (error: any) {
     throw new Error(error.response.data.message || "Error fetching post")
@@ -82,7 +82,7 @@ const PostPage = () => {
         <div className="flex flex-col gap-2 flex-wrap">
           <div className="flex flex-row gap-2 items-center">
             <Image className="rounded-full" src={user} alt="user" width={32} height={32} />
-            <p className="text-xs font-medium dark:text-neutral-200 text-white">{mockPost.authorName}</p>
+            <p className="text-xs font-medium dark:text-neutral-200">{mockPost.authorName}</p>
           </div>
           <p className="text-3xl font-semibold dark:text-white">{post.title}</p>
           <p className="text-sm text-neutral-300">{post.description}</p>

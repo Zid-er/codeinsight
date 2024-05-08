@@ -17,16 +17,23 @@ model post {
     tag         String
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
-    // author    User?   @relation(fields: [authorId], references: [id])
-    // authorId Int?
+    owner    user?   @relation(fields: [ownerId], references: [id])
+    ownerId Int?
     // @@index([title])
 }
 
+model project {
+    id Int @id @default(autoincrement())
+    name String 
+    owner    user?   @relation(fields: [ownerId], references: [id])
+    ownerId Int?
+}
 
 model user {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  username  String
-  hash String
-//   posts Post[]
+    id    Int     @id @default(autoincrement())
+    email String  @unique
+    username  String
+    hash String
+    posts post[]
+    projects project[]
 }
