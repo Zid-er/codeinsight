@@ -114,7 +114,7 @@ export default function Home() {
 
   const tagOptions = tagValues.map((tagOption) =>
     <button key={tagOption} id={tagOption} onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleTagSelection(e)}
-      className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 hover:opacity-50 bg-transparent hover:border-lime-600 dark:text-white ` + (selectedTags.get(tagOption) ? "bg-lime-400 dark:text-black" : "")}>{tagOption}</button>
+      className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 hover:opacity-50 hover:border-lime-600 ` + (selectedTags.get(tagOption) ? "bg-lime-400 dark:text-black" : "dark:text-white")}>{tagOption}</button>
   )
 
   // this line is the key to avoid the error.
