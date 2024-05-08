@@ -21,7 +21,7 @@ const mock_data = [
     id: 1,
     title: "In 10 Days!",
     description: "Created in 10 Days: Brendan Eich created JavaScript in just 10 days in May 1995 while working at Netscape Communications Corporation. It was originally named Mocha, then changed to LiveScript before finally settling on JavaScript.",
-    tag: "JS"
+    tag: "Javascript"
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const mock_data = [
     - Interfaces in TypeScript are used to define the structure of an object. They describe the properties and methods that an object must have.
     - Interfaces can be implemented by classes, ensuring that the class implements all properties and methods defined in the interface.
     - Interfaces are open-ended, meaning you can extend them later to add additional properties or methods.`,
-    tag: "JS"
+    tag: "Javascript"
   },
   {
     id: 3,
@@ -55,8 +55,20 @@ const mock_data = [
     - - Requires initialization during declaration.
     - - Prevents reassignment and redeclaration within the same block scope.
     - - Provides immutability for assigned values (not for objects, arrays, etc.).`,
-    tag: "JS"
-  }
+    tag: "Javascript"
+  },
+  {
+    id: 4,
+    title: "Test Go!",
+    description: "Created in 10 Days: Brendan Eich created JavaScript in just 10 days in May 1995 while working at Netscape Communications Corporation. It was originally named Mocha, then changed to LiveScript before finally settling on JavaScript.",
+    tag: "Go"
+  },
+  {
+    id: 5,
+    title: "Test C++!",
+    description: "Created in 10 Days: Brendan Eich created JavaScript in just 10 days in May 1995 while working at Netscape Communications Corporation. It was originally named Mocha, then changed to LiveScript before finally settling on JavaScript.",
+    tag: "C++"
+  },
 ]
 
 type PostsResponse = {
@@ -88,6 +100,12 @@ export default function Home() {
   let dropdownRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
     setHasMounted(true)
+
+    const initTags = new Map(selectedTags) // set all tags to selected initially
+    for (let tag of tagValues) {
+      initTags.set(tag, true);
+    }
+    setSelectedTags(initTags)
 
     let handler = (e: MouseEvent) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target as Node)) {
@@ -146,14 +164,20 @@ export default function Home() {
           }
         </button>
       </div>
-      {posts && <div className="flex flex-col gap-2">
+      {selectedTags && <div className="flex flex-col gap-2">
         {
-          posts.map((post, i) => {
-            return (
-              <Link href={`/posts/${post.id}`} key={i}>
-                <Card key={post.id} {...post} />
-              </Link>
-            )
+          mock_data.map((post, i) => {
+            if (selectedTags.get(post.tag)) {
+              return (
+                <Link href={`/posts/${post.id}`} key={i}>
+                  <Card key={post.id} {...post} />
+                </Link>
+              )
+            } else {
+              return (
+                null
+              )
+            }
           })
         }
       </div>}
