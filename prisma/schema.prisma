@@ -17,16 +17,13 @@ model post {
     tag         String
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
+    project project? @relation(fields: [projectId], references: [id])
+    projectId Int?
     owner    user?   @relation(fields: [ownerId], references: [id])
     ownerId Int?
-    // @@index([title])
-}
+    images image[]
 
-model project {
-    id Int @id @default(autoincrement())
-    name String 
-    owner    user?   @relation(fields: [ownerId], references: [id])
-    ownerId Int?
+    // @@index([title])
 }
 
 model user {
@@ -36,4 +33,22 @@ model user {
     hash String
     posts post[]
     projects project[]
+}
+
+model project {
+    id Int @id @default(autoincrement())
+    name String 
+    gist String
+    tag String
+    posts post[]
+    owner    user?   @relation(fields: [ownerId], references: [id])
+    ownerId Int?
+}
+
+model image {
+    id Int @id @default(autoincrement())
+    url String
+    order Int?
+    owner    post?   @relation(fields: [postId], references: [id])
+    postId Int?
 }

@@ -26,6 +26,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const path = usePathname()
   const [mounted, setMounted] = useState<boolean>(false)
   const { setTheme } = useTheme()
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function RootLayout({
       <body>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider attribute="class">
-            <Navbar />
+            { path.includes("login") || path.includes("signup") ? <></> : <Navbar /> }
             {children}
           </ThemeProvider>
         </QueryClientProvider>

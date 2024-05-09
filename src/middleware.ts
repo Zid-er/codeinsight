@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { env } from "~/env";
 import * as jose from "jose";
 
-const protectedRoutes = ["/create", "/projects"];
+const protectedRoutes = ["/create", "/projects", "/projects/create"];
 
 
 const jwtConfig = {

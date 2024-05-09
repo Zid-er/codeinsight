@@ -148,7 +148,7 @@ export default function Home() {
             }
           </button>
         </div>
-        <Button goto="/create">Create +</Button>
+        <Button><Link href="/create">Create +</Link></Button>
 
       </div>
       {posts && <div className="flex flex-col gap-2">

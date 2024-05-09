@@ -4,9 +4,11 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { userStore } from "~/stores/general";
 import { Button } from "~/ui/Button";
 
 const Login = () => {
+    const updateUser = userStore((state) => state.updateUser)
     const router = useRouter()
 
     const [password, setPassword] = useState<string>("")
@@ -21,10 +23,13 @@ const Login = () => {
                 data: { email: email, password: password},
             });
             console.log(res)
-            // document.cookie = `token=${res.data.token}`
+            if (res) {
+                updateUser(res.data.user.payload)
+            }
             router.replace("/")
-        } catch(_) {
-            router.replace("/signin")
+        } catch(err) {
+            console.log("ERR IN LOGIN: ", err)
+            router.replace("/signup")
         }
     }
     return (

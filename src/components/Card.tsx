@@ -29,7 +29,7 @@ const Card = ({
         setExpanded(false)
     }
     return (
-        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4 dark:text-[#b5b5b5]">
+        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4 dark:text-[#b5b5b5] w-full">
             <div className="flex flex-col gap-2 flex-wrap">
                 <p className="text-xs">u/developer</p>
                 <p className="text-3xl font-semibold dark:text-white">{title}</p>

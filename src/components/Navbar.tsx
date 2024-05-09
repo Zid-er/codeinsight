@@ -3,10 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import logo from "~/assets/logo2.svg";
+import { userStore } from "~/stores/general";
 import { Button } from "~/ui/Button";
 
 const Navbar = () => {
-    const [user, setUser] = useState<boolean | { id: string, username: string, iat: number, exp: number }>(false)
+    const user = userStore((state) => state.user)
+    const updateUser = userStore((state) => state.updateUser)
+    // const [user, setUser] = useState<boolean | { id: string, username: string, iat: number, exp: number }>(false)
     useEffect(() => {
         const ca = async () => {
             try {
@@ -15,7 +18,8 @@ const Navbar = () => {
                 if (auth && auth.data) {
                     const authy = auth.data.isauth
                     if (authy) {
-                        setUser(auth.data.user)
+                        // setUser(auth.data.user)
+                        updateUser(auth.data.user.payload)
                     }
                 }
                 

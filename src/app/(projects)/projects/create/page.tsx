@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 import { Button } from "~/ui/Button";
 
@@ -11,18 +12,8 @@ const CreateProject = () => {
         e.preventDefault()
         console.log("Hi: ", name, description, tag)
         if (!name || !description || !tag) throw Error("Empty fields!")
-        await fetch(`/api/project/create`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: name,
-                description: description,
-                tag: tag
-            }),
-        });
+        const res = await axios.post(`/api/project/create`, { title:name, description:description, tag:tag}, { withCredentials: true })
+        console.log(res)
     };
     return (
         <form className="flex flex-col justify-center items-center translate-y-[5%] dark:text-[#ffffff]" onSubmit={create}>
