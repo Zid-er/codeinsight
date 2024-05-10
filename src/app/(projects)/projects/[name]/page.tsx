@@ -59,15 +59,16 @@ const Feed = ({ params }: { params: { name: string }}) => {
                                             title={post.title}
                                             description={post.description}
                                             tag={post.tag}
+                                            imgUrls={post.imgUrls}
                                         />
-                                        <div className="flex flex-col items-end justify-end">
+                                        {/* <div className="flex flex-col items-end justify-end">
 
                                         {
                                             post.imgUrls.map((img) => {
                                                 return <Image src={img.url} alt="post image" width={500} height={200} />
                                             })
                                         }
-                                        </div>
+                                        </div> */}
                                     </div>
                                     :
                                     <Card 

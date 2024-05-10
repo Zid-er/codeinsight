@@ -15,7 +15,8 @@ const Card = ({
     id,
     title,
     description,
-    tag
+    tag,
+    imgUrls
 }: PostType) => {
     const keep_des = description
     const [des, setDes] = useState<string>(description.length > 400 ? description.slice(0, 200) : description)
@@ -42,6 +43,14 @@ const Card = ({
                     : 
                     des.split("\n").map((para: string, i: number) => {
                         return <p key={i}>{para}</p>
+                    })
+                }
+                </div>
+                <div className="flex flex-col">
+
+                {
+                    imgUrls && imgUrls.map((img) => {
+                        return <Image src={img.url} alt="post image" width={300} height={100} />
                     })
                 }
                 </div>
