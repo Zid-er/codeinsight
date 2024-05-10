@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "~/server/db";
 import * as bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { env } from "~/env";
 import { cookies } from "next/headers";
 import * as jose from "jose";
@@ -37,7 +36,7 @@ export async function POST(req: Request) {
                 .sign(jwtConfig.secret)
                 console.log("TOKEN IS: ", token)
                 cookies().set("token", token);
-                return NextResponse.json({ message: "Found user!", token: token }, { status: 200 });
+                return NextResponse.json({ message: "Found user!", token: token, user: { payload: { username: res.username, userId: res.id }} }, { status: 200 });
 
             } catch (err) {
                 return NextResponse.json({ message: "Err When Signing JWT!" }, { status: 404 });

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client"
 import React from 'next'
-import { type PostT } from '~/types/PostT'
+import { type PostType } from '~/types/PostType'
 import Image from 'next/image';
 import dbldarrow from '~/assets/dbldarrow.svg'
 import dbluarrow from '~/assets/dbluarrow.svg'
@@ -16,7 +16,7 @@ const Card = ({
     title,
     description,
     tag
-}: PostT) => {
+}: PostType) => {
     const keep_des = description
     const [des, setDes] = useState<string>(description.length > 400 ? description.slice(0, 200) : description)
     const [expanded, setExpanded] = useState<boolean>(false)
@@ -29,7 +29,7 @@ const Card = ({
         setExpanded(false)
     }
     return (
-        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4 dark:text-[#b5b5b5]">
+        <div className="border border-slate-200 dark:bg-primary dark:border-none rounded px-8 py-4 flex flex-col gap-4 dark:text-[#b5b5b5] w-full">
             <div className="flex flex-col gap-2 flex-wrap">
                 <p className="text-xs">u/developer</p>
                 <p className="text-3xl font-semibold dark:text-white">{title}</p>
