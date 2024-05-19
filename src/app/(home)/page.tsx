@@ -76,44 +76,48 @@ type PostsResponse = {
   posts: PostType[],
 }
 
-const getPosts = async () => {
+type Tag = {
+  title: string,
+  selected: boolean
+}
+
+const getPosts = async (tagsQueryString = "") => {
   try {
-    const res = await axios.get<PostsResponse>("/api/post/get", { withCredentials: true })
+    const res = await axios.get<PostsResponse>(`/api/post/get?tags=${tagsQueryString}`, { withCredentials: true })
     return res.data.posts
   } catch (error) {
     console.log(error)
   }
 }
 
+const tags = [
+  { title: "Javascript", selected: true },
+  { title: "C++", selected: true },
+  { title: "Go", selected: true },
+  { title: "Rust", selected: true },
+  { title: "Python", selected: true },
+]
+
 export default function Home() {
   const { resolvedTheme: theme, setTheme } = useTheme()
   const [hasMounted, setHasMounted] = useState(false);
   const [dropdown, setDropdown] = useState<boolean>(false)
-  const tagValues = ["Javascript", "C++", "Go", "Rust", "Python"]
-  const [selectedTags, setSelectedTags] = useState<Map<string, boolean>>(new Map<string, boolean>())
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([...tags])
+  const tagsQueryString = selectedTags.filter(tag => tag.selected).map(tag => tag.title).join(",")
   const { data: posts } = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPosts,
+    queryKey: ["posts", tagsQueryString],
+    queryFn: () => getPosts(tagsQueryString)
   })
-
 
   // code to close tagsDropdown on click outside of it
   let dropdownRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
     setHasMounted(true)
-
-    const initTags = new Map(selectedTags) // set all tags to selected initially
-    for (let tag of tagValues) {
-      initTags.set(tag, true);
-    }
-    setSelectedTags(initTags)
-
     let handler = (e: MouseEvent) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target as Node)) {
         setDropdown(false)
       }
     }
-
     document.addEventListener("mousedown", handler)
 
     return () => {
@@ -125,20 +129,25 @@ export default function Home() {
     // @ts-ignore
     const tagToAdd: string = e.target.id
     setSelectedTags((prevSelectedTags) => {
-      const updatedSelectedTags = new Map(prevSelectedTags);
-      updatedSelectedTags.set(tagToAdd, !prevSelectedTags.get(tagToAdd));
-      return updatedSelectedTags;
+      return prevSelectedTags.map(tag => {
+        if (tag.title === tagToAdd) {
+          return { title: tag.title, selected: !tag.selected }
+        }
+        return tag
+      })
     });
   }
 
-  const tagOptions = tagValues.map((tagOption) =>
-    <button key={tagOption} id={tagOption} onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleTagSelection(e)}
-      className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 hover:opacity-50 hover:border-lime-600 ` + (selectedTags.get(tagOption) ? "bg-lime-400 dark:text-black" : "dark:text-white")}>{tagOption}</button>
-  )
+  const tagIsSelected = (tag: string) => {
+    return selectedTags.some(item => item.title === tag && item.selected)
+  }
+
+  const tagOptions = tags.map((tag) =>
+    <button key={tag.title} id={tag.title} onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleTagSelection(e)}
+      className={`border dark:border-[#282828] rounded-lg text-sm px-2 py-1 hover:opacity-50 hover:border-lime-600 ` + (tagIsSelected(tag.title) ? "bg-lime-400 dark:text-black" : "dark:text-white")}>{tag.title}</button>)
 
   // this line is the key to avoid the error.
   if (!hasMounted) return null;
-
   return (
     <div className="flex flex-col py-12 gap-2 md:px-32">
       <div className="flex flex-row gap-1 items-center w-full justify-between">
@@ -172,7 +181,7 @@ export default function Home() {
       {selectedTags && <div className="flex flex-col gap-2">
         {
           mock_data.map((post, i) => {
-            if (selectedTags.get(post.tag)) {
+            if (selectedTags.find(tag => tag.title === post.tag && tag.selected)) {
               return (
                 <Link href={`/posts/${post.id}`} key={i}>
                   <Card key={post.id} {...post} />
